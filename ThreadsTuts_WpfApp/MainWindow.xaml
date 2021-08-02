@@ -1,0 +1,18 @@
+﻿<Window x:Class="ThreadsTuts_WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ThreadsTuts_WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <ProgressBar Minimum="0" Maximum="100" Value="0" Height="20" />
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button x:Name="StartButton" MinWidth="50" Content="Старт" Click="StartButton_OnClick" />
+                <Button x:Name="StopButton" MinWidth="50" Content="Стоп" Click="StopButton_OnClick" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
