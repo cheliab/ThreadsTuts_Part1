@@ -8,10 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <ProgressBar Minimum="0" Maximum="100" Value="0" Height="20" />
+            <ProgressBar x:Name="mainProgressBar" Minimum="0" Maximum="100" Value="0" Height="20" />
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Button x:Name="StartButton" MinWidth="50" Content="Старт" Click="StartButton_OnClick" />
-                <Button x:Name="StopButton" MinWidth="50" Content="Стоп" Click="StopButton_OnClick" />
+                <Button x:Name="stopButton" MinWidth="50" Content="Стоп" Click="StopButton_OnClick" />
+                <Button x:Name="startButton" MinWidth="50" Content="Старт" Click="StartButton_OnClick" />
             </StackPanel>
         </StackPanel>
     </Grid>

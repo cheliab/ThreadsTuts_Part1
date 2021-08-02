@@ -20,6 +20,8 @@ namespace ThreadsTuts_WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Worker _worker;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -27,14 +29,30 @@ namespace ThreadsTuts_WpfApp
 
         private void StartButton_OnClick(object sender, RoutedEventArgs e)
         {
+            _worker = new Worker();
+            _worker.ProcessChanged += Worker_ProcessChanged;
+            _worker.WorkCompleted += Worker_WorkCompleted;
+
+            startButton.IsEnabled = false;
             
+            _worker.Work();
         }
 
         private void StopButton_OnClick(object sender, RoutedEventArgs e)
         {
             
         }
-        
-        
+
+        private void Worker_WorkCompleted(bool cancelled)
+        {
+            string message = cancelled ? "Процесс отменен" : "Процесс завершен!";
+            MessageBox.Show(message);
+            startButton.IsEnabled = true;
+        }
+
+        private void Worker_ProcessChanged(int progress)
+        {
+            mainProgressBar.Value = progress;
+        }
     }
 }
