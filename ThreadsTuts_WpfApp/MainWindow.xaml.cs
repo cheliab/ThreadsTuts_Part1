@@ -49,13 +49,17 @@ namespace ThreadsTuts_WpfApp
         {
             Action action = () =>
             {
+                mainProgressBar.Value = 0;
+                startButton.IsEnabled = true;
+                
                 string message = cancelled ? "Процесс отменен" : "Процесс завершен!";
                 MessageBox.Show(message);
-                startButton.IsEnabled = true;
-                mainProgressBar.Value = 0;
             };
 
-            this.Dispatcher.Invoke(action);
+            if (!Dispatcher.CheckAccess())
+                Dispatcher.Invoke(action);
+            else
+                action();
         }
 
         private void Worker_ProcessChanged(int progress)
@@ -65,7 +69,10 @@ namespace ThreadsTuts_WpfApp
                 mainProgressBar.Value = progress;
             };
 
-            this.Dispatcher.Invoke(action);
+            if (!Dispatcher.CheckAccess())
+                Dispatcher.Invoke(action);
+            else
+                action();
         }
     }
 }
