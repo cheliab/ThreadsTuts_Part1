@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,8 +35,9 @@ namespace ThreadsTuts_WpfApp
             _worker.WorkCompleted += Worker_WorkCompleted;
 
             startButton.IsEnabled = false;
-            
-            _worker.Work();
+
+            Thread thread = new Thread(_worker.Work);
+            thread.Start();
         }
 
         private void StopButton_OnClick(object sender, RoutedEventArgs e)
@@ -45,14 +47,24 @@ namespace ThreadsTuts_WpfApp
 
         private void Worker_WorkCompleted(bool cancelled)
         {
-            string message = cancelled ? "Процесс отменен" : "Процесс завершен!";
-            MessageBox.Show(message);
-            startButton.IsEnabled = true;
+            Action action = () =>
+            {
+                string message = cancelled ? "Процесс отменен" : "Процесс завершен!";
+                MessageBox.Show(message);
+                startButton.IsEnabled = true;
+            };
+
+            this.Dispatcher.Invoke(action);
         }
 
         private void Worker_ProcessChanged(int progress)
         {
-            mainProgressBar.Value = progress;
+            Action action = () =>
+            {
+                mainProgressBar.Value = progress;
+            };
+
+            this.Dispatcher.Invoke(action);
         }
     }
 }
