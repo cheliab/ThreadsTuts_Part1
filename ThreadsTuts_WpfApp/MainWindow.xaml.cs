@@ -56,10 +56,7 @@ namespace ThreadsTuts_WpfApp
                 MessageBox.Show(message);
             };
 
-            if (!Dispatcher.CheckAccess())
-                Dispatcher.Invoke(action);
-            else
-                action();
+            this.InvokeEx(action);
         }
 
         private void Worker_ProcessChanged(int progress)
@@ -69,10 +66,7 @@ namespace ThreadsTuts_WpfApp
                 mainProgressBar.Value = progress;
             };
 
-            if (!Dispatcher.CheckAccess())
-                Dispatcher.Invoke(action);
-            else
-                action();
+            this.InvokeEx(action);
         }
     }
 }
