@@ -42,7 +42,7 @@ namespace ThreadsTuts_WpfApp
 
         private void StopButton_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            _worker.Cancel();
         }
 
         private void Worker_WorkCompleted(bool cancelled)
@@ -52,6 +52,7 @@ namespace ThreadsTuts_WpfApp
                 string message = cancelled ? "Процесс отменен" : "Процесс завершен!";
                 MessageBox.Show(message);
                 startButton.IsEnabled = true;
+                mainProgressBar.Value = 0;
             };
 
             this.Dispatcher.Invoke(action);
