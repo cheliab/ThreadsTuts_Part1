@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ThreadsTuts_WpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <StackPanel>
         <StackPanel>
             <ProgressBar x:Name="mainProgressBar" Minimum="0" Maximum="100" Value="0" Height="20" />
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
@@ -14,5 +14,12 @@
                 <Button x:Name="startButton" MinWidth="50" Content="Старт" Click="StartButton_OnClick" />
             </StackPanel>
         </StackPanel>
-    </Grid>
+        <StackPanel>
+            <ProgressBar x:Name="SyncContext_mainProgressBar" Minimum="0" Maximum="100" Value="0" Height="20" />
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button x:Name="SyncContext_stopButton" MinWidth="50" Content="Стоп" Click="SyncContext_StopButton_OnClick" />
+                <Button x:Name="SyncContext_startButton" MinWidth="50" Content="Старт" Click="SyncContext_StartButton_OnClick" />
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </Window>
